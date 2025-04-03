@@ -12,7 +12,7 @@ import Profile from './components/Profile';
 import ChatInterface from './components/AiInterface';
 import TaskForm from './components/TaskForm';
 import Chatbot from './components/Chatbot';
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider } from './Context/Theme';
 
 function App() {
   const [showAi, setShowAI] = useState(false);
