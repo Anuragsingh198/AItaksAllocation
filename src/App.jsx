@@ -9,11 +9,10 @@ import Team from './components/Teams';
 import Tasks from './components/Tasks';
 import Analytics from './components/Analytics';
 import Profile from './components/Profile';
-import { ThemeProvider } from './context/ThemeContext';
 import ChatInterface from './components/AiInterface';
 import TaskForm from './components/TaskForm';
 import Chatbot from './components/Chatbot';
-import Settings from './components/Settings';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   const [showAi, setShowAI] = useState(false);
