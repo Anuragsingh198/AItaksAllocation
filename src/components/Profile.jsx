@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, User, Mail, Phone, MapPin, Server } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../Context/Theme';
 
 const Profile = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();

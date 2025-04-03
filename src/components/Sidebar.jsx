@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Home, Users, ClipboardList, Bot, User, LogOut, Shield, Settings } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext';
 import AdminLoginModal from './AdministrationLogin';
 import { useValue } from '../Context/DataContext';
+import { useTheme } from '../Context/Theme';
 
 const Sidebar = () => {
   const location = useLocation();
