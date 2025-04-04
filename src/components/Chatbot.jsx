@@ -7,6 +7,28 @@ const BASE_URL_KEY = 'apiBaseUrl';
 const FORM_DETAILS_KEY = 'form_details';
 const COLORS = ['#4F46E5', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
 
+const formatMessageText = (text) => {
+  if (!text) return null;
+
+  let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-indigo-600 dark:text-indigo-400">$1</strong>');
+
+  formattedText = formattedText.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+  
+  formattedText = formattedText.replace(/##\s(.*?)(\n|$)/g, '<h3 class="text-lg font-bold mt-4 mb-2 text-gray-800 dark:text-gray-200">$1</h3>');
+  
+  formattedText = formattedText.replace(/#\s(.*?)(\n|$)/g, '<h2 class="text-xl font-bold mt-4 mb-3 text-gray-900 dark:text-gray-100">$1</h2>');
+ 
+  formattedText = formattedText.replace(/\n\*\s(.*?)(\n|$)/g, '<li class="ml-4 list-disc">$1</li>');
+  formattedText = formattedText.replace(/\n-\s(.*?)(\n|$)/g, '<li class="ml-4 list-disc">$1</li>');
+ 
+  formattedText = formattedText.replace(/`(.*?)`/g, '<code class="bg-gray-200 dark:bg-gray-700 px-1 py-0.5 rounded text-sm font-mono">$1</code>');
+  
+  formattedText = formattedText.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">$1</a>');
+
+  formattedText = formattedText.replace(/\n/g, '<br />');
+  return formattedText;
+};
+
 export default function Chatbot({ initialMessages, onClose }) {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState(() => {
@@ -58,18 +80,10 @@ export default function Chatbot({ initialMessages, onClose }) {
             role: m.isUser ? "user" : "assistant",
             content: m.text
           })),
-          agent_forms: storedAgentForms // Now sending stored forms
+          agent_forms: storedAgentForms
         })
       });
-        console.log({
-          question: question,
-          authRole: "manager",
-          chatHistory: messages.filter(m => !m.isLoading).map(m => ({
-            role: m.isUser ? "user" : "assistant",
-            content: m.text
-          })),
-          agent_forms: storedAgentForms 
-        })
+
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
       }
@@ -92,6 +106,7 @@ export default function Chatbot({ initialMessages, onClose }) {
       setIsLoading(false);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -151,7 +166,6 @@ export default function Chatbot({ initialMessages, onClose }) {
       ]);
     }
   };
-  
 
   const updateBaseUrl = (newUrl) => {
     let cleanedUrl = newUrl.trim();
@@ -212,9 +226,16 @@ export default function Chatbot({ initialMessages, onClose }) {
   };
 
   const renderMessageContent = (message) => {
+    const formattedText = formatMessageText(message.text);
+    
     return (
       <>
-        <div className="break-words whitespace-pre-wrap">{message.text}</div>
+        {formattedText && (
+          <div 
+            className="break-words whitespace-pre-wrap"
+            dangerouslySetInnerHTML={{ __html: formattedText }}
+          />
+        )}
         {message.plots && renderPlot(message.plots)}
         {message.encoded_image && (
           <div className="mt-2">
@@ -238,18 +259,8 @@ export default function Chatbot({ initialMessages, onClose }) {
       <div className="bg-indigo-600 dark:bg-indigo-800 text-white p-4 flex justify-between items-center">
         <div>
           <h2 className="font-semibold text-lg">Chat Assistant</h2>
-          {/* <div className="text-xs opacity-80 truncate max-w-xs" title={baseUrl}>
-            {baseUrl ? `API: ${baseUrl}/call_agent` : "No API URL configured"}
-          </div> */}
         </div>
         <div className="flex gap-4 items-center">
-          {/* <button 
-            onClick={() => setShowUrlInput(!showUrlInput)}
-            className="text-sm px-3 py-1 rounded hover:bg-indigo-700 dark:hover:bg-indigo-900 transition-colors"
-            title="Configure API URL"
-          >
-            Settings
-          </button> */}
           <button 
             onClick={clearChatHistory}
             className="text-sm px-3 py-1 rounded hover:bg-indigo-700 dark:hover:bg-indigo-900 transition-colors"
@@ -267,7 +278,6 @@ export default function Chatbot({ initialMessages, onClose }) {
         </div>
       </div>
 
-    
       {showUrlInput && (
         <div className="bg-indigo-50 dark:bg-gray-800 p-4 border-b border-indigo-100 dark:border-gray-700">
           <div className="flex items-center gap-2">
@@ -318,7 +328,6 @@ export default function Chatbot({ initialMessages, onClose }) {
         ))}
       </div>
 
-    
       <form onSubmit={handleSubmit} className="border-t border-gray-200 dark:border-gray-700 p-4 bg-gray-50 dark:bg-gray-800">
         <div className="flex gap-2">
           <input
