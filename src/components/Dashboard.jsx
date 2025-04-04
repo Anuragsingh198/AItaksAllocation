@@ -12,9 +12,9 @@ const Dashboard = () => {
   };
 
   const recentTasks = [
-    { id: 1, title: 'Frontend Development', assignedTo: 'John Doe', status: 'In Progress' },
-    { id: 2, title: 'API Integration', assignedTo: 'Jane Smith', status: 'Completed' },
-    { id: 3, title: 'Database Design', assignedTo: 'Mike Johnson', status: 'Pending' }
+    { id: 1, title: 'Frontend Development', assignedTo: 'Kartik Avinash', status: 'In Progress' },
+    { id: 2, title: 'API Integration', assignedTo: 'Sriram sai', status: 'Completed' },
+    { id: 3, title: 'Database Design', assignedTo: 'Anurag Singh', status: 'Pending' }
   ];
 
   return (

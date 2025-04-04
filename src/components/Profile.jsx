@@ -6,10 +6,10 @@ import { useTheme } from '../Context/Theme';
 const Profile = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();
   const [profile, setProfile] = useState({
-    name: 'John Doe',
-    email: 'john@example.com',
-    phone: '+1 234 567 890',
-    location: 'New York, USA',
+    name: 'kartk Avinah',
+    email: 'kartik@gmail.com',
+    phone: '+91 73356 63451',
+    location: 'Madhya Pradesh , India',
     bio: 'Passionate about creating efficient and scalable solutions.',
     skills: ['React', 'Node.js', 'TypeScript', 'Python'],
   });

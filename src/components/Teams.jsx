@@ -2,7 +2,8 @@ import { UserPlus, Mail, Phone, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useValue } from '../Context/DataContext';
-
+import anuragImage from '../assets/anuragphoto.jpg';
+import kartikImage from '../assets/kartikimage.jpg';
 const Team = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -15,39 +16,40 @@ const Team = () => {
     proficiency: 'beginner'
   });
 
-  const teamMembers = [
-    {
-      id: 1,
-      name: 'John Doe',
-      role: 'Senior Developer',
-      email: 'john@example.com',
-      phone: '+1 234 567 890',
-      skills: ['React', 'Node.js', 'Python'],
-      availability: 'Full-time',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-    },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      role: 'UI/UX Designer',
-      email: 'jane@example.com',
-      phone: '+1 234 567 891',
-      skills: ['Figma', 'Adobe XD', 'Sketch'],
-      availability: 'Part-time',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-    },
-    {
-      id: 3,
-      name: 'Mike Johnson',
-      role: 'Backend Developer',
-      email: 'mike@example.com',
-      phone: '+1 234 567 892',
-      skills: ['Java', 'Spring Boot', 'PostgreSQL'],
-      availability: 'Full-time',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-    }
-  ];
 
+
+const teamMembers = [
+  {
+    id: 1,
+    name: 'Kartik Avinash',
+    role: 'Senior Developer',
+    email: 'Kartik@gamil.com',
+    phone: '+91 86022 90085',
+    skills: ['React', 'Node.js', 'Python'],
+    availability: 'Full-time',
+    image: kartikImage
+  },
+  {
+    id: 2,
+    name: 'Anurag Singh Bisen',
+    role: 'UI/UX Designer',
+    email: 'anusingh@gmail.com',
+    phone: '+91 72240 57972',
+    skills: ['Figma', 'Adobe XD', 'Sketch'],
+    availability: 'Part-time',
+    image: anuragImage
+  },
+  {
+    id: 3,
+    name: 'Sriram Sai',
+    role: 'Backend Developer',
+    email: 'sriram@gmail.com',
+    phone: '+91 72546 25532',
+    skills: ['Java', 'Spring Boot', 'PostgreSQL'],
+    availability: 'Full-time',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
+  }
+];
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -58,7 +60,7 @@ const Team = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
+    
     setIsFormOpen(false);
     setFormData({
       name: '',
@@ -92,12 +94,11 @@ const Team = () => {
         </motion.button>
       </div>
 
-      {/* Team members grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {teamMembers.map(member => (
           <div key={member.id} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
             <div className="flex items-center gap-4">
-              <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover" />
+              <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover"  referrerPolicy="no-referrer" />
               <div>
                 <h3 className="text-lg font-semibold dark:text-white">{member.name}</h3>
                 <p className="text-gray-600 dark:text-gray-300">{member.role}</p>
@@ -135,7 +136,6 @@ const Team = () => {
         ))}
       </div>
 
-      {/* Add Member Form Modal */}
       {isFormOpen && (
   <div 
     className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-50"

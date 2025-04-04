@@ -100,7 +100,7 @@ const TaskForm = ({ onClose, onSubmit }) => {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div>
+                {/* <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
                   <select
                     name="status"
@@ -112,7 +112,7 @@ const TaskForm = ({ onClose, onSubmit }) => {
                     <option value="In Progress">In Progress</option>
                     <option value="Completed">Completed</option>
                   </select>
-                </div>
+                </div> */}
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Priority</label>
